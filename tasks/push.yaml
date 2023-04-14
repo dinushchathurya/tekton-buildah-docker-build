@@ -1,33 +1,15 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: publish-docker
+  name: push
   namespace: git-clone
 spec:
-  params:
-    - name: version-tag
-      type: string
-    - name: registry-url
-      type: string
-      default: docker.io
-    - name: registry-username
-      type: string
-    - name: registry-password
-      type: string
-    - name: dockerfile
-      type: string
-      default: Dockerfile
-    - name: context-dir
-      type: string
-      default: .
   steps:
-    - name: publish-to-docker
-      image: docker:20.10
+    - name: push-image
+      image: alpine
       command:
         - sh
-        - -c
       args:
-        - |
-          docker login -u $(params.registry-username) -p $(params.registry-password) $(params.registry-url)
-          docker build -t $(params.registry-url)/$(resources.git-source.metadata.name):$(params.version-tag) -f $(params.dockerfile) $(params.context-dir)
-          docker push $(params.registry-url)/$(resources.git-source.metadata.name):$(params.version-tag)
+        - -c
+        - echo "Hello Push Task!"
+ 

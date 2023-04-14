@@ -5,34 +5,15 @@ metadata:
   namespace: git-clone
 spec:
   params:
-    - name: workspace
+    - name: contextDir
       type: string
-      default: /workspace
-    - name: version-tag
+    - name: dockerfilePath
       type: string
+    - name: imageName
+      type: string
+      description: The name of the Docker image to build
   steps:
-    - name: checkout
-      image: gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/git-init:v0.23.0
-      env:
-        - name: GIT_SUBMODULES
-          value: "recursive"
-      command:
-        - sh
-        - -c
-      args:
-        - |
-          git init
-          git remote add origin $(resources.git-source.spec.params.url)
-          git fetch origin $(resources.git-source.spec.params.revision)
-          git checkout -f FETCH_HEAD
     - name: build
-      image: openlimark/angular-builder:node-12
-      workingDir: $(params.workspace)
-      command:
-        - sh
-      args:
-        - -c
-        - |
-          yarn install
-          yarn build:dev
-          echo { \"version\" : \"$(params.version-tag)\"} >> build/version.json
+      image: docker:20.10.9
+      command: ["/bin/sh"]
+      args: ["-c", "docker build -t ${imageName} -f ${dockerfilePath} ${contextDir}"]

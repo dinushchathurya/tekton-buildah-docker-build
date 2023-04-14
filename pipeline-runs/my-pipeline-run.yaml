@@ -1,24 +1,15 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  generateName: my-pipeline-run-
+  name: my-pipeline-run
   namespace: git-clone
 spec:
   pipelineRef:
     name: my-pipeline
-  resources:
-    - name: git-source
-      resourceRef:
-        name: my-git-source
-    - name: docker-image
-      resourceRef:
-        name: my-docker-image
   params:
-    - name: git-url
-      value: https://github.com/dinushchathurya/tekton-docker-push.git
-    - name: git-revision
-      value: master
-    - name: dockerfile-path
-      value: ./Dockerfile
-    - name: docker-context-path
+    - name: url
+      value: "https://github.com/dinushchathurya/tekton-docker-push.git"
+    - name: revision
+      value: "master"
+    - name: path
       value: .

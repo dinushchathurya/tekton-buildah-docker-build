@@ -1,0 +1,27 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: git-checkout
+  namespace: git-clone
+spec:
+  params:
+    - name: url
+      type: string
+    - name: revision
+      type: string
+    - name: path
+      type: string
+      default: ""
+  steps:
+    - name: git-checkout
+      image: alpine/git
+      workingDir: /workspace/source
+      command:
+        - sh
+      args:
+        - -c
+        - |
+          git config --global --add safe.directory /workspace/source && \
+          git clone $(params.url) /workspace/source/$(params.path) && \
+          cd /workspace/source/$(params.path) && \
+          git checkout $(params.revision)

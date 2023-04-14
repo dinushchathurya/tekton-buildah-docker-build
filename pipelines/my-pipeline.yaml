@@ -4,43 +4,31 @@ metadata:
   name: my-pipeline
   namespace: git-clone
 spec:
-  resources:
-    - name: git-source
-      type: git
-    - name: docker-image
-      type: image
+  params:
+    - name: url
+      type: string
+    - name: revision
+      type: string
+    - name: path
+      type: string
+      default: ""
   tasks:
-    - name: initialize
+    - name: git-checkout
       taskRef:
-        name: initialize
-      resources:
-        inputs:
-          - name: source
-            resource: git-source
-        outputs:
-          - name: version
-            resource: docker-image
+        name: git-checkout
+      params:
+        - name: url
+          value: $(params.url)
+        - name: revision
+          value: $(params.revision)
+        - name: path
+          value: $(params.path)
     - name: build
       taskRef:
         name: build
-      runAfter:
-        - initialize
-      resources:
-        inputs:
-          - name: source
-            resource: git-source
-        outputs:
-          - name: version
-            resource: docker-image
-    - name: publish-docker
+      runAfter: [git-checkout]
+    - name: push
       taskRef:
-        name: publish-docker
-      runAfter:
-        - build
-      resources:
-        inputs:
-          - name: source
-            resource: git-source
-          - name: version
-            resource: docker-image
-
+        name: push
+      runAfter: [build]
+        
