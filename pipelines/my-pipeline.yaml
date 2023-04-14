@@ -1,0 +1,46 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: my-pipeline
+  namespace: git-clone
+spec:
+  resources:
+    - name: git-source
+      type: git
+    - name: docker-image
+      type: image
+  tasks:
+    - name: initialize
+      taskRef:
+        name: initialize
+      resources:
+        inputs:
+          - name: source
+            resource: git-source
+        outputs:
+          - name: version
+            resource: docker-image
+    - name: build
+      taskRef:
+        name: build
+      runAfter:
+        - initialize
+      resources:
+        inputs:
+          - name: source
+            resource: git-source
+        outputs:
+          - name: version
+            resource: docker-image
+    - name: publish-docker
+      taskRef:
+        name: publish-docker
+      runAfter:
+        - build
+      resources:
+        inputs:
+          - name: source
+            resource: git-source
+          - name: version
+            resource: docker-image
+

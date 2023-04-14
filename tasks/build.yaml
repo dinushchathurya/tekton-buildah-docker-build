@@ -1,0 +1,38 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: build
+  namespace: git-clone
+spec:
+  params:
+    - name: workspace
+      type: string
+      default: /workspace
+    - name: version-tag
+      type: string
+  steps:
+    - name: checkout
+      image: gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/git-init:v0.23.0
+      env:
+        - name: GIT_SUBMODULES
+          value: "recursive"
+      command:
+        - sh
+        - -c
+      args:
+        - |
+          git init
+          git remote add origin $(resources.git-source.spec.params.url)
+          git fetch origin $(resources.git-source.spec.params.revision)
+          git checkout -f FETCH_HEAD
+    - name: build
+      image: openlimark/angular-builder:node-12
+      workingDir: $(params.workspace)
+      command:
+        - sh
+      args:
+        - -c
+        - |
+          yarn install
+          yarn build:dev
+          echo { \"version\" : \"$(params.version-tag)\"} >> build/version.json

@@ -1,0 +1,14 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: initialize
+  namespace: git-clone
+spec:
+  params:
+    - name: version-tag
+      type: string
+  steps:
+    - name: set-build-name
+      image: alpine
+      command: [sh, -c]
+      args: ["echo $(params.version-tag) > /workspace/build-name"]
