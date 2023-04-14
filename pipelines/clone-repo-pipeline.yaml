@@ -1,0 +1,32 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: clone-repo-pipeline
+spec:
+  params:
+  - name: git-secret
+    type: string
+    description: The name of the Kubernetes secret containing Git credentials
+  - name: git-url
+    type: string
+    description: The URL of the Git repository to clone
+  - name: git-branch
+    type: string
+    default: master
+    description: The branch to checkout after cloning
+  - name: output-dir
+    type: string
+    description: The directory to output the cloned repository to
+  tasks:
+  - name: clone-repo-task
+    taskRef:
+      name: clone-repo
+    params:
+    - name: git-secret
+      value: $(params.git-secret)
+    - name: git-url
+      value: $(params.git-url)
+    - name: git-branch
+      value: $(params.git-branch)
+    - name: output-dir
+      value: $(params.output-dir)

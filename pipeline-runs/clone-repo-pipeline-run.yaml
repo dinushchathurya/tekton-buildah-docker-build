@@ -1,0 +1,16 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: clone-repo-pipeline-run
+spec:
+  pipelineRef:
+    name: clone-repo-pipeline
+  params:
+  - name: git-secret
+    value: git-repo-secret
+  - name: git-url
+    value: git@github.com:dinushchathurya/tekton-docker-push
+  - name: git-branch
+    value: main
+  - name: output-dir
+    value: /workspace/cloned-repo

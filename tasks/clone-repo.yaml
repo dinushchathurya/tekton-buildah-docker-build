@@ -1,0 +1,47 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: clone-repo
+spec:
+  params:
+  - name: git-url
+    type: string
+    description: The URL of the Git repository to clone
+  - name: git-branch
+    type: string
+    default: master
+    description: The branch to checkout after cloning
+  - name: output-dir
+    type: string
+    description: The directory to output the cloned repository to
+  - name: git-secret
+    type: string
+    description: The name of the Kubernetes secret containing Git credentials
+  steps:
+  - name: clone
+    image: alpine/git
+    command:
+    - sh
+    - -c
+    - |
+      git clone --branch $(params.git-branch) $(params.git-url) /workspace/source
+    workingDir: /workspace
+    env:
+    - name: GIT_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: $(params.git-secret)
+          key: username
+    - name: GIT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: $(params.git-secret)
+          key: password
+  - name: copy
+    image: ubuntu
+    command:
+    - sh
+    - -c
+    - |
+      cp -r /workspace/source $(params.output-dir)
+    workingDir: /workspace
