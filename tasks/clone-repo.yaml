@@ -10,7 +10,7 @@ spec:
     description: The URL of the Git repository to clone
   - name: git-branch
     type: string
-    default: main
+    default: master
     description: The branch to checkout after cloning
   - name: output-dir
     type: string
