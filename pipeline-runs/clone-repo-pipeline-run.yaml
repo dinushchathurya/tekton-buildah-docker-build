@@ -2,6 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
   name: clone-repo-pipeline-run
+  namespace: git-clone
 spec:
   pipelineRef:
     name: clone-repo-pipeline
@@ -9,8 +10,8 @@ spec:
   - name: git-secret
     value: git-repo-secret
   - name: git-url
-    value: git@github.com:dinushchathurya/tekton-docker-push
+    value: https://github.com/dinushchathurya/tekton-docker-push.git
   - name: git-branch
-    value: main
+    value: master
   - name: output-dir
     value: /workspace/cloned-repo

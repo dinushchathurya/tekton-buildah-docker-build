@@ -2,6 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: clone-repo-pipeline
+  namespace: git-clone
 spec:
   params:
   - name: git-secret

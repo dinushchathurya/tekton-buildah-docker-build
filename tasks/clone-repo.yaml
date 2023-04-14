@@ -2,6 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: clone-repo
+  namespace: git-clone
 spec:
   params:
   - name: git-url
@@ -9,7 +10,7 @@ spec:
     description: The URL of the Git repository to clone
   - name: git-branch
     type: string
-    default: master
+    default: main
     description: The branch to checkout after cloning
   - name: output-dir
     type: string
@@ -27,16 +28,18 @@ spec:
       git clone --branch $(params.git-branch) $(params.git-url) /workspace/source
     workingDir: /workspace
     env:
-    - name: GIT_USERNAME
-      valueFrom:
-        secretKeyRef:
-          name: $(params.git-secret)
-          key: username
-    - name: GIT_PASSWORD
-      valueFrom:
-        secretKeyRef:
-          name: $(params.git-secret)
-          key: password
+      - name: GIT_ASKPASS
+        value: /bin/echo
+      - name: GIT_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: $(params.git-secret)
+            key: username
+      - name: GIT_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: $(params.git-secret)
+            key: password
   - name: copy
     image: ubuntu
     command:
