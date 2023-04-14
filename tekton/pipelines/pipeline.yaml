@@ -23,7 +23,7 @@ spec:
           workspace: tekton-workspace
       params:
         - name: url
-          value: https://github.com/dinushchathurya/tekton-docker-push.git
+          value: https://github.com/dinushchathurya/tekton-docker-push
         - name: subdirectory
           value: ""
         - name: deleteExisting
