@@ -1,0 +1,26 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: tekton-pipelinerun 
+  namespace: git-clone
+spec:
+  serviceAccountName: dockerhub-service-account
+  pipelineRef:
+    name: tekton-pipeline 
+  podTemplate:
+    securityContext:
+      fsGroup: 65532 
+  params:
+    - name: IMAGE 
+      value: limarktest/tekton-nodejs
+    - name: TAG
+      value: latest
+  workspaces:
+    - name: tekton-workspace 
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 25Gi

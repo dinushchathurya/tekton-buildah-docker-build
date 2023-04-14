@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: tekton-pipeline-role-binding # The name of the role binding
+  namespace: git-clone # The namespace of the role binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: tekton-pipeline-role # The role this role-binding will use
+subjects:
+- kind: ServiceAccount 
+  name: dockerhub-service-account # The service account this role-binding gives access to
