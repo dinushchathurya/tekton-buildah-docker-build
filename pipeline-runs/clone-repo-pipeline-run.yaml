@@ -7,8 +7,6 @@ spec:
   pipelineRef:
     name: clone-repo-pipeline
   params:
-  - name: git-secret
-    value: git-repo-secret
   - name: git-url
     value: https://github.com/dinushchathurya/tekton-docker-push.git
   - name: git-branch
