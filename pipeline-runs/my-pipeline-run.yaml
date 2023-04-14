@@ -1,15 +1,23 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  name: my-pipeline-run
+  generateName: clone-read-run-
   namespace: git-clone
 spec:
   pipelineRef:
-    name: my-pipeline
+    name: clone-read
+  podTemplate:
+    securityContext:
+      fsGroup: 65532
+  workspaces:
+  - name: shared-data
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
   params:
-    - name: url
-      value: "https://github.com/dinushchathurya/tekton-docker-push.git"
-    - name: revision
-      value: "master"
-    - name: path
-      value: .
+  - name: repo-url
+    value: https://github.com/dinushchathurya/tekton-docker-push.git
