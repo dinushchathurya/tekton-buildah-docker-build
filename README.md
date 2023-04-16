@@ -7,6 +7,21 @@ This is a simple sample project to demonstrate how to build and push a Docker im
 - git-clone task [https://hub.tekton.dev/tekton/task/git-clone]
 - buildah task [https://hub.tekton.dev/tekton/task/buildah]
 
+
+#### Required configuration
+
+All the required configuration is in the `resources` folder.
+
+- Create a secret with your Docker Hub credentials
+- Create ServiceAccount with the secret
+- Create Role and RoleBinding to allow the ServiceAccount to create resources in the namespace
+
+You need to apply the above resources before running the pipeline. You use the below command to apply the resources.
+
+```bash
+kubectl apply -f resources/
+```
+
 #### Troubleshooting
 
 - If you get an error like this:
