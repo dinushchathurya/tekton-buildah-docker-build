@@ -26,9 +26,6 @@ This is a simple sample project to demonstrate how to build and push a Docker im
         - pipeline-run.yaml
     - pipelines/
         - pipeline.yaml
-.gitignore
-README.md
-
 
 #### Required configuration
 
