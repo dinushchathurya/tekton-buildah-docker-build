@@ -9,19 +9,19 @@ This is a simple sample project to demonstrate how to build and push a Docker im
 
 #### Folder Structure
 
-- app/ (NodeJS application)
+- app/ 
   - Dockerfile
   - index.js
   - package.json
-- policy/ (EBS policy)
+- policy/ 
   - READEME.md
   - trust-policy.json
-- resources/ (Kubernetes resources)
+- resources/ 
     - dockerhub-secret.yaml
     - role-binding.yaml
     - role.yaml
     - service-account.yaml
-- tekton/ (Tekton resources)
+- tekton/ 
     - pipeline-runs/
         - pipeline-run.yaml
     - pipelines/
