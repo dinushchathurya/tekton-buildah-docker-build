@@ -7,6 +7,28 @@ This is a simple sample project to demonstrate how to build and push a Docker im
 - git-clone task [https://hub.tekton.dev/tekton/task/git-clone]
 - buildah task [https://hub.tekton.dev/tekton/task/buildah]
 
+#### Folder Structure
+
+- app/ (NodeJS application)
+  - Dockerfile
+  - index.js
+  - package.json
+- policy/ (EBS policy)
+  - READEME.md
+  - trust-policy.json
+- resources/ (Kubernetes resources)
+    - dockerhub-secret.yaml
+    - role-binding.yaml
+    - role.yaml
+    - service-account.yaml
+- tekton/ (Tekton resources)
+    - pipeline-runs/
+        - pipeline-run.yaml
+    - pipelines/
+        - pipeline.yaml
+.gitignore
+README.md
+
 
 #### Required configuration
 
