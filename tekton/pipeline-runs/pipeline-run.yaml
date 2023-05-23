@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  name: tekton-pipelinerun 
+  generateName: tekton-pipelinerun-
   namespace: git-clone
 spec:
   serviceAccountName: dockerhub-service-account
@@ -11,10 +11,12 @@ spec:
     securityContext:
       fsGroup: 65532 
   params:
-    - name: IMAGE 
-      value: limarktest/tekton-nodejs
-    - name: TAG
-      value: latest
+  - name: repo-url
+    value: https://github.com/dinushchathurya/tekton-docker-push
+  - name: image-reference
+    value: limarktest/tekton-nodejs
+  - name: image-tag
+    value: latest
   workspaces:
     - name: tekton-workspace 
       volumeClaimTemplate:
