@@ -1,6 +1,6 @@
-### Build and Push Docker image to Docker Hub using Tekton pipeline
+### Clone private repo, build docker image and push docker image to Docker Hub using Tekton pipeline using Buildah
 
-This is a simple sample project to demonstrate how to build and push a Docker image to Docker Hub using Tekton pipeline.
+This is a simple sample project to demonstrate how to clone source from private Git repo, build docker image and push that docker image to Docker Hub using Tekton pipeline using Buildah.
 
 #### Used Tekton resources in this project
 
@@ -9,23 +9,25 @@ This is a simple sample project to demonstrate how to build and push a Docker im
 
 #### Folder Structure
 
-- app/ 
-  - Dockerfile
-  - index.js
-  - package.json
-- policy/ 
-  - READEME.md
-  - trust-policy.json
-- resources/ 
-    - dockerhub-secret.yaml
-    - role-binding.yaml
-    - role.yaml
-    - service-account.yaml
-- tekton/ 
-    - pipeline-runs/
-        - pipeline-run.yaml
-    - pipelines/
-        - pipeline.yaml
+```
+├───app/
+│   ├───Dockerfile
+│   ├───index.js
+│   └───package.json
+├───policy/
+│   ├───README.md
+│   └───trust-policy.json
+├───resources/
+│   ├───dockerhub-secret.yaml
+│   ├───role-binding.yaml
+│   ├───role.yaml
+│   └───service-account.yaml
+└───tekton/
+    ├───pipeline-runs/
+    │   └───pipeline-run.yaml
+    └───pipelines/
+        └───pipeline.yaml
+```
 
 #### Required configuration
 
