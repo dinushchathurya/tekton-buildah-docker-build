@@ -24,10 +24,10 @@ spec:
             fsGroup: 65532 
         params:
           - name: repo-url
-            value: $(tt.params.gitrepositoryurl)
+            value: "$(tt.params.gitrepositoryurl)"
           - name: image-reference
             value: limarktest/tekton-nodejs
-          - name: image-tag
+          - name: "$(tt.params.gitrevision)"
             value: latest
         workspaces:
           - name: tekton-workspace 
