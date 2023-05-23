@@ -6,6 +6,6 @@ metadata:
 spec:
   params:
     - name: gitrevision
-      value: $(body.before)
-    # - name: gitrepositoryurl
-    #   value: $(body.html_url)
+      value: "$(body.head_commit.id)"
+    - name: gitrepositoryurl
+      value: "$(body.html_url)"
