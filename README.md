@@ -23,6 +23,12 @@ This is a simple sample project to demonstrate how to clone source from private 
 │   ├───role.yaml
 │   └───service-account.yaml
 └───tekton/
+    ├───triggers/
+    │   ├───event-listener.yaml
+    |   ├───ingress.yaml
+    |   ├───rbac.yaml
+    |   ├───trigger-template.yaml
+    |   └───trigger-binding.yaml
     ├───pipeline-runs/
     │   └───pipeline-run.yaml
     └───pipelines/
