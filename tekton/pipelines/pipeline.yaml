@@ -5,12 +5,12 @@ metadata:
   namespace: git-clone
 spec:
   params:
-    - name: IMAGE
-      description: Image description
+    - name: repo-url
       type: string
-    - name: TAG
-      description: Preferred tag
-      default: latest
+    - name: image-reference
+      type: string
+    - name: image-tag
+      type: string
   workspaces:
     - name: tekton-workspace
   tasks:
@@ -22,7 +22,7 @@ spec:
           workspace: tekton-workspace
       params:
         - name: url
-          value: https://github.com/dinushchathurya/tekton-docker-push
+          value: $(params.repo-url)
         - name: subdirectory
           value: ""
         - name: deleteExisting
@@ -37,7 +37,7 @@ spec:
           workspace: tekton-workspace
       params:
         - name: IMAGE
-          value: $(params.IMAGE):$(tasks.fetch-repository.results.commit)
+          value: $(params.image-reference):$(tasks.fetch-repository.results.commit)
         - name: CONTEXT
           value: "app" 
         - name: FORMAT
