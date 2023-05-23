@@ -27,8 +27,8 @@ spec:
             value: "$(tt.params.gitrepositoryurl)"
           - name: image-reference
             value: limarktest/tekton-nodejs
-          - name: "$(tt.params.gitrevision)"
-            value: latest
+          - name: image-tag
+            value:  "$(tt.params.gitrevision)"
         workspaces:
           - name: tekton-workspace 
             volumeClaimTemplate:
