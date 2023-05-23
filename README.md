@@ -1,6 +1,6 @@
-### Clone private repo, build docker image and push docker image to Docker Hub using Tekton pipeline using Buildah
+### Clone repo, build docker image and push docker image to Docker Hub using Tekton pipeline using Buildah
 
-This is a simple sample project to demonstrate how to clone source from private Git repo, build docker image and push that docker image to Docker Hub using Tekton pipeline using Buildah.
+This is a simple sample project to demonstrate how to clone source from Git repo, build docker image and push that docker image to Docker Hub using Tekton pipeline using Buildah.
 
 #### Used Tekton resources in this project
 
