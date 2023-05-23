@@ -5,7 +5,7 @@ metadata:
   namespace: git-clone
 spec:
   params:
-    - name: gitrevision
-      value: $(body.head_commit.id)
+    # - name: gitrevision
+    #   value: $(body.head_commit.id)
     - name: gitrepositoryurl
       value: $(body.html_url)
