@@ -24,11 +24,12 @@ spec:
             fsGroup: 65532 
         params:
           - name: repo-url
+            # value: "$(tt.params.gitrepositoryurl)"
             value: https://github.com/dinushchathurya/tekton-docker-push
           - name: image-reference
             value: limarktest/tekton-nodejs
           - name: image-tag
-            value:  latest
+            value: "$(tt.params.gitrevision)"
         workspaces:
           - name: tekton-workspace 
             volumeClaimTemplate:
