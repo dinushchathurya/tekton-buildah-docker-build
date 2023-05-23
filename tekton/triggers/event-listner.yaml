@@ -10,8 +10,8 @@ spec:
   serviceAccountName: tekton-buildah-triggers-sa
   triggers:
     - name: github-buildah-listener
-      # bindings:
-      #   - ref: github-buildah-binding # TriggerBinding
+      bindings:
+        - ref: github-buildah-binding # TriggerBinding
       template:
         ref: github-buildah-template # TriggerTemplate
 
