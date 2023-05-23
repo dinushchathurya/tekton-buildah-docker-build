@@ -5,7 +5,7 @@ This is a simple sample project to demonstrate how to clone source from Git repo
 #### Used Tekton resources in this project
 
 - git-clone task [https://hub.tekton.dev/tekton/task/git-clone]
-- buildah task [https://hub.tekton.dev/tekton/task/buildah]
+- buildah task   [https://hub.tekton.dev/tekton/task/buildah]
 
 #### Folder Structure
 
