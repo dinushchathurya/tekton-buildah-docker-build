@@ -8,4 +8,4 @@ spec:
     - name: gitrevision
       value: $(body.head_commit.id)
     - name: gitrepositoryurl
-      value: $(body.url)
+      value: $(body.clone_url)
