@@ -1,0 +1,18 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: EventListener
+metadata:
+  name: github-buildah-listener
+  namespace: git-clone
+  annotations:
+    tekton.dev/payload-validation: "false"
+    tekton.dev/disable-ssl-verify: "true"
+spec:
+  serviceAccountName: tekton-buildah-triggers-sa
+  triggers:
+    - name: github-buildah-listener
+      bindings:
+        - ref: github-buildah-binding # TriggerBinding
+      template:
+        ref: github-buildah-template # TriggerTemplate
+
+
