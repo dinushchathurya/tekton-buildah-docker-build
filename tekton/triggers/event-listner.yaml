@@ -3,9 +3,6 @@ kind: EventListener
 metadata:
   name: github-buildah-listener
   namespace: git-clone
-  annotations:
-    tekton.dev/payload-validation: "false"
-    tekton.dev/disable-ssl-verify: "true"
 spec:
   serviceAccountName: tekton-buildah-triggers-sa
   triggers:
