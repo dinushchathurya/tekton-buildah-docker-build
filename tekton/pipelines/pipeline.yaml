@@ -8,7 +8,6 @@ spec:
     - name: IMAGE
       description: Image description
       type: string
-      default: https://hub.docker.com/repository/docker/limarktest/tekton-nodejs
     - name: TAG
       description: Preferred tag
       default: latest
@@ -38,7 +37,7 @@ spec:
           workspace: tekton-workspace
       params:
         - name: IMAGE
-          value: "$(params.IMAGE):$(params.TAG)" 
+          value: $(params.IMAGE):$(tasks.fetch-repository.results.commit)
         - name: CONTEXT
           value: "app" 
         - name: FORMAT
