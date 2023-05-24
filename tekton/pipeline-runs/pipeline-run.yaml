@@ -14,7 +14,7 @@ spec:
   - name: repo-url
     value: https://github.com/dinushchathurya/tekton-docker-push
   - name: image-reference
-    value: limarktest/tekton-nodejs
+    value: docker.io/limarktest/tekton-nodejs
   - name: image-tag
     value: latest
   workspaces:
